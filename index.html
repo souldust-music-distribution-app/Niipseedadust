@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Niipseedadust | Official Website</title>
-    <!-- Modern Display Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- FontAwesome Vector Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
         :root {
             --bg-deep: #07070a;
-            --bg-card: #0f0f14;
+            --bg-card: rgba(15, 15, 20, 0.7);
+            --bg-card-solid: #0f0f14;
             --accent-purple: #9d4edd;
             --accent-neon: #00f5d4;
             --text-pure: #ffffff;
@@ -30,15 +29,27 @@
         }
 
         body {
-            background-color: var(--bg-deep);
             color: var(--text-pure);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            background-color: var(--bg-deep);
+            
+            /* Core Background Image blending system */
+            background-image: 
+                linear-gradient(to right, var(--bg-deep) 0%, rgba(7, 7, 10, 0.7) 30%, rgba(7, 7, 10, 0.2) 50%, rgba(7, 7, 10, 0.7) 75%, var(--bg-deep) 100%),
+                linear-gradient(to bottom, rgba(7, 7, 10, 0.8) 0%, rgba(7, 7, 10, 0.1) 20%, rgba(7, 7, 10, 0.1) 80%, var(--bg-deep) 100%),
+                url('Niipseedadust 5.jpg');
+            
+            background-repeat: no-repeat;
+            background-position: center 30%;
+            background-size: cover;
+            background-attachment: fixed; /* Keeps portrait locked in place while content scrolls */
         }
 
         /* Real-time Counter Top Bar */
         .analytics-bar {
-            background: linear-gradient(90deg, #140126, #07070a);
+            background: rgba(20, 1, 38, 0.8);
+            backdrop-filter: blur(8px);
             padding: 10px 5%;
             font-size: 0.8rem;
             display: flex;
@@ -48,6 +59,8 @@
             font-weight: 600;
             letter-spacing: 0.5px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 1001;
         }
 
         /* Navigation Header */
@@ -59,7 +72,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(7, 7, 10, 0.85);
+            background: rgba(7, 7, 10, 0.6);
             backdrop-filter: blur(12px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
@@ -96,6 +109,8 @@
             padding: 100px 5% 60px;
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         .section-title {
@@ -104,9 +119,10 @@
             margin-bottom: 50px;
             text-transform: uppercase;
             letter-spacing: -1px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
-        /* Section 1: Homepage / Hero Banner */
+        /* Section 1: Homepage / Hero Banner Layout */
         .hero-container {
             display: grid;
             grid-template-columns: 1.2fr 1fr;
@@ -115,19 +131,28 @@
             min-height: 75vh;
         }
 
+        .hero-text {
+            background: rgba(7, 7, 10, 0.5);
+            padding: 40px;
+            border-radius: 24px;
+            backdrop-filter: blur(4px);
+        }
+
         .hero-text h1 {
             font-family: 'Syne', sans-serif;
             font-size: 5rem;
             line-height: 1;
             margin-bottom: 25px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
         .hero-text p {
             font-size: 1.2rem;
-            color: var(--text-muted);
+            color: var(--text-pure);
             margin-bottom: 40px;
             max-width: 550px;
             line-height: 1.6;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
 
         .cta-group {
@@ -152,6 +177,7 @@
             background-color: var(--accent-purple);
             color: white;
             box-shadow: 0 8px 30px rgba(157, 78, 221, 0.3);
+            border: none;
         }
 
         .btn-main:hover {
@@ -160,21 +186,25 @@
         }
 
         .btn-outline {
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             color: white;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
         }
 
         .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.1);
             border-color: white;
         }
 
         .latest-drop-card {
             background: var(--bg-card);
+            backdrop-filter: blur(10px);
             border-radius: 24px;
             padding: 30px;
-            border: 1px solid var(--border-glow);
+            border: 1px solid rgba(255,255,255,0.1);
             text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         .drop-cover {
@@ -199,15 +229,24 @@
             gap: 60px;
         }
 
+        .about-content-box {
+            background: rgba(7, 7, 10, 0.7);
+            padding: 40px;
+            border-radius: 24px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
         .bio-text {
             font-size: 1.15rem;
             line-height: 1.8;
-            color: var(--text-muted);
+            color: #e2e8f0;
             margin-bottom: 30px;
         }
 
         .bio-text strong {
             color: white;
+            border-bottom: 1px solid var(--accent-purple);
         }
 
         /* Name Breakdown Matrix */
@@ -219,7 +258,7 @@
         }
 
         .meaning-card {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(0, 0, 0, 0.4);
             padding: 20px;
             border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.05);
@@ -238,35 +277,22 @@
         }
 
         .collabs-box {
-            background: rgba(157, 78, 221, 0.05);
+            background: rgba(157, 78, 221, 0.1);
             border-left: 4px solid var(--accent-purple);
             padding: 20px;
             border-radius: 0 12px 12px 0;
             margin-top: 30px;
         }
 
-        .gallery-strip {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .gallery-item {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 40px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.02);
-            color: rgba(255,255,255,0.2);
-        }
-
-        /* Section 3: Music Hub (Refactored for Spotify Native Iframe Integration) */
+        /* Section 3: Music Hub */
         .music-engine {
-            background: linear-gradient(180deg, var(--bg-card) 0%, #09090d 100%);
+            background: rgba(15, 15, 20, 0.8);
+            backdrop-filter: blur(12px);
             border-radius: 32px;
             padding: 40px;
-            border: 1px solid rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
             margin-bottom: 40px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
         }
 
         .player-dashboard {
@@ -280,9 +306,9 @@
             width: 100%;
             border-radius: 20px;
             overflow: hidden;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            background: #000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
         }
 
         .track-meta-counters {
@@ -308,7 +334,7 @@
             align-items: center;
             gap: 20px;
             padding: 18px 25px;
-            background: rgba(255,255,255,0.01);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 14px;
             transition: all 0.3s;
             cursor: pointer;
@@ -316,14 +342,15 @@
         }
 
         .track-row:hover {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255,255,255,0.05);
             border-color: rgba(255,255,255,0.1);
+            transform: scale(1.01);
         }
 
         .track-row.active {
             border-left: 4px solid var(--accent-neon);
-            background: rgba(157, 78, 221, 0.08);
-            border-color: rgba(157, 78, 221, 0.2);
+            background: rgba(157, 78, 221, 0.2);
+            border-color: rgba(157, 78, 221, 0.4);
         }
 
         .row-stream-count {
@@ -333,33 +360,32 @@
             text-align: right;
         }
 
-        /* Section 4: Bonus / Merch / Contact */
+        /* Section 4: Merch / Contact */
         .bonus-grid {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
             gap: 60px;
         }
 
-        .merch-preview-card {
-            background: var(--bg-card);
+        .merch-preview-card, .booking-form-box {
+            background: rgba(15, 15, 20, 0.85);
+            backdrop-filter: blur(10px);
             border-radius: 24px;
             padding: 40px;
-            text-align: center;
-            border: 1px dashed rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        .booking-form-box {
-            background: var(--bg-card);
-            border-radius: 24px;
-            padding: 40px;
-            border: 1px solid rgba(255,255,255,0.02);
+        .merch-preview-card {
+            text-align: center;
+            border: 1px dashed rgba(255,255,255,0.2);
         }
 
         .input-element {
             width: 100%;
             padding: 16px;
-            background: var(--bg-deep);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(7, 7, 10, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 8px;
             color: white;
             font-size: 0.95rem;
@@ -372,12 +398,16 @@
             border-color: var(--accent-purple);
         }
 
-        /* Section 5: Footer */
+        /* Footer Layer */
         footer {
             margin-top: 100px;
+            background: rgba(7, 7, 10, 0.9);
+            backdrop-filter: blur(10px);
             border-top: 1px solid rgba(255,255,255,0.05);
             padding: 60px 5%;
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
         .social-matrix {
@@ -406,8 +436,11 @@
             line-height: 1.8;
         }
 
-        /* Responsive UI Optimization */
+        /* Responsive Configuration UI */
         @media (max-width: 968px) {
+            body {
+                background-position: center center; /* Shift background design logic for mobile screens */
+            }
             .hero-container, .about-grid, .bonus-grid {
                 grid-template-columns: 1fr;
             }
@@ -419,13 +452,11 @@
 </head>
 <body>
 
-    <!-- Platform Analytics Metrics System Bar -->
     <div class="analytics-bar">
         <span><i class="fa-solid fa-users"></i> Platform Visits: <span id="view-count-val">0</span></span>
         <span><i class="fa-solid fa-bolt"></i> Global Digital Streams: <span id="global-stream-val">0</span></span>
     </div>
 
-    <!-- Main Header Bar -->
     <nav>
         <a href="#" class="logo">TRACKSEEDADUST<span>.</span></a>
         <div class="nav-links">
@@ -436,7 +467,6 @@
         </div>
     </nav>
 
-    <!-- Section 1: Homepage / Landing Hero Banner -->
     <section id="home">
         <div class="hero-container">
             <div class="hero-text">
@@ -458,16 +488,14 @@
         </div>
     </section>
 
-    <!-- Section 2: Roots & Brand Identity -->
-    <section id="about" style="border-top: 1px solid rgba(255,255,255,0.02);">
-        <h2 class="section-title">The Heritage</h2>
+    <section id="about">
         <div class="about-grid">
-            <div>
+            <div class="about-content-box">
+                <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 25px;">The Heritage</h2>
                 <p class="bio-text">
                     Born in <strong>Mthwalume</strong> on the scenic South Coast of KwaZulu-Natal, Niipseedadust's complex musical alignment was forged and completely matured within <strong>KwaMashu, Durban</strong>. This transition from raw coastal frequencies to one of South Africa's most historic urban club environments outlines his signature rhythms.
                 </p>
                 
-                <!-- Brand Architectural Name Breakdown -->
                 <h3 style="font-family: 'Syne'; font-size: 1.5rem; margin-bottom: 15px;">The Moniker Paradigm</h3>
                 <div class="name-meaning-grid">
                     <div class="meaning-card">
@@ -489,24 +517,18 @@
                     <p style="font-size: 0.95rem; color: var(--text-muted);">Consistently linking sonic textures with industry forces including <strong>DJ Ndoh, Budda Sage, and The Elevatorz</strong> to drive tech infrastructure.</p>
                 </div>
             </div>
-            
-            <div class="gallery-strip">
-                <div class="gallery-item"><i class="fa-solid fa-sliders fa-2x"></i><p style="font-size:0.8rem; margin-top:10px;">KwaMashu Hub</p></div>
-                <div class="gallery-item"><i class="fa-solid fa-wave-square fa-2x"></i><p style="font-size:0.8rem; margin-top:10px;">Tribal Elements</p></div>
-            </div>
+            <div></div>
         </div>
     </section>
 
-    <!-- Section 3: Specialized Interactive Music Center (Spotify Powered) -->
     <section id="music">
         <h2 class="section-title">Discography Matrix</h2>
         
         <div class="music-engine">
             <div class="player-dashboard">
-                <!-- Official Spotify Sandbox Embed Console -->
                 <div class="spotify-frame-wrapper">
                     <iframe id="spotify-player-iframe" 
-                        src="https://open.spotify.com/embed/artist/1576406977?utm_source=generator&theme=0" 
+                        src="https://open.spotify.com/embed/track/2S6mF90R3YvHCTEM0zG9Z2" 
                         width="100%" 
                         height="152" 
                         frameBorder="0" 
@@ -522,10 +544,8 @@
                 </div>
             </div>
 
-            <!-- Dynamic Interactive Track Matrix -->
             <div class="discography-list">
-                <!-- Track 0 -->
-                <div class="track-row" onclick="loadAndPlayTrack(0)" id="row-0">
+                <div class="track-row active" onclick="loadAndPlayTrack(0)" id="row-0">
                     <i class="fab fa-spotify" style="color: #1DB954;"></i>
                     <div>
                         <h4 style="font-weight: 600;" id="title-0">Asenuru</h4>
@@ -534,7 +554,6 @@
                     <div class="row-stream-count"><i class="fa-solid fa-bolt"></i> <span id="stream-0">0</span></div>
                     <span style="color: var(--accent-neon); font-size: 0.85rem;"><i class="fa-solid fa-signal"></i> Streaming</span>
                 </div>
-                <!-- Track 1 -->
                 <div class="track-row" onclick="loadAndPlayTrack(1)" id="row-1">
                     <i class="fab fa-spotify" style="color: #1DB954;"></i>
                     <div>
@@ -544,7 +563,6 @@
                     <div class="row-stream-count"><i class="fa-solid fa-bolt"></i> <span id="stream-1">0</span></div>
                     <span style="color: var(--accent-neon); font-size: 0.85rem;"><i class="fa-solid fa-signal"></i> Streaming</span>
                 </div>
-                <!-- Track 2 -->
                 <div class="track-row" onclick="loadAndPlayTrack(2)" id="row-2">
                     <i class="fab fa-spotify" style="color: #1DB954;"></i>
                     <div>
@@ -554,7 +572,6 @@
                     <div class="row-stream-count"><i class="fa-solid fa-bolt"></i> <span id="stream-2">0</span></div>
                     <span style="color: var(--accent-neon); font-size: 0.85rem;"><i class="fa-solid fa-signal"></i> Streaming</span>
                 </div>
-                <!-- Track 3 -->
                 <div class="track-row" onclick="loadAndPlayTrack(3)" id="row-3">
                     <i class="fab fa-spotify" style="color: #1DB954;"></i>
                     <div>
@@ -564,7 +581,6 @@
                     <div class="row-stream-count"><i class="fa-solid fa-bolt"></i> <span id="stream-3">0</span></div>
                     <span style="color: var(--accent-neon); font-size: 0.85rem;"><i class="fa-solid fa-signal"></i> Streaming</span>
                 </div>
-                <!-- Track 4 -->
                 <div class="track-row" onclick="loadAndPlayTrack(4)" id="row-4">
                     <i class="fab fa-spotify" style="color: #1DB954;"></i>
                     <div>
@@ -576,22 +592,9 @@
                 </div>
             </div>
         </div>
-
-        <!-- Catalog Extension Metadata Panel -->
-        <div style="background: rgba(255,255,255,0.01); border-radius: 16px; padding: 25px; border: 1px solid rgba(255,255,255,0.03); display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            <div>
-                <h5 style="color: var(--accent-purple); font-size: 1rem; margin-bottom: 5px;">Amanxeba EP (2024)</h5>
-                <p style="font-size: 0.85rem; color: var(--text-muted);">Includes foundational tech-cut track "Mdunge's Tribe".</p>
-            </div>
-            <div>
-                <h5 style="color: var(--accent-purple); font-size: 1rem; margin-bottom: 5px;">Motherland EP (2022)</h5>
-                <p style="font-size: 0.85rem; color: var(--text-muted);">Essential earlier catalog compilation containing "Jungle Hunter".</p>
-            </div>
-        </div>
     </section>
 
-    <!-- Section 4: Bonus Suite & Bookings System Matrix -->
-    <section id="bonus" style="border-top: 1px solid rgba(255,255,255,0.02);">
+    <section id="bonus">
         <div class="bonus-grid">
             <div>
                 <h2 class="section-title" style="margin-bottom: 30px;">Merchandise</h2>
@@ -618,77 +621,70 @@
         </div>
     </section>
 
-    <!-- Section 5: Matrix Ecosystem Footer -->
     <footer>
         <div class="social-matrix">
-            <a href="https://open.spotify.com/artist/1576406977" target="_blank" title="Spotify"><i class="fab fa-spotify"></i></a>
+            <a href="https://open.spotify.com" target="_blank" title="Spotify"><i class="fab fa-spotify"></i></a>
             <a href="https://apple.com" target="_blank" title="Apple Music"><i class="fab fa-apple"></i></a>
             <a href="https://youtube.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
             <a href="https://soundcloud.com" target="_blank" title="SoundCloud"><i class="fab fa-soundcloud"></i></a>
             <a href="https://traxsource.com" target="_blank" title="Traxsource"><i class="fa-solid fa-record-vinyl"></i></a>
             <a href="https://beatport.com" target="_blank" title="Beatport"><i class="fa-solid fa-square-audio"></i></a>
-            <a href="https://amazon.com" target="_blank" title="Amazon Music"><i class="fab fa-amazon"></i></a>
             <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="https://tiktok.com" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
         </div>
         <p style="margin-bottom: 5px;">Direct Inquiries / Audio Track Licensing: <strong>bookings@niipseedadust.io</strong></p>
         <p style="color: rgba(255,255,255,0.3); font-size: 0.75rem;">Global Catalogue Distribution Powered securely via DistroKid.</p>
-        <p style="margin-top: 25px;">&copy; 2026 Niipseedadust. All digital framework layers monitored and preserved securely.</p>
+        <p style="margin-top: 25px;">© 2026 Niipseedadust. All digital framework layers monitored and preserved securely.</p>
     </footer>
 
-    <!-- Comprehensive Real-time Spotify Control Integration Engine -->
     <script>
         /**
          * TRACK INVENTORY MAPPING OBJECT MATRIX
-         * Paste standard Spotify Track URLs directly inside the "spotifyTrackUrl" fields below.
-         * The script dynamically reformats standard links into authorized player streaming hooks.
+         * Replace these sample Spotify URLs with the exact track URLs copied straight from his Spotify profile.
          */
         const catalogMatrix = [
             { 
                 id: 0, 
                 title: "Asenuru", 
                 project: "Latest Single Drop (2026)", 
-                spotifyTrackUrl: "https://open.spotify.com/track/7zC7pUvYvLpZ9zXN6g31gC" 
+                spotifyTrackUrl: "https://open.spotify.com/track/2S6mF90R3YvHCTEM0zG9Z2" 
             },
             { 
                 id: 1, 
                 title: "Brothers", 
                 project: "The Future Is Afro (2026)", 
-                spotifyTrackUrl: "https://open.spotify.com/track/4PTG9Z68G2v6HwY3gZqdCg" 
+                spotifyTrackUrl: "https://open.spotify.com/track/4PTG3Z6ehGkBF3zIwY9G0C" 
             },
             { 
                 id: 2, 
                 title: "Bayeza", 
                 project: "The Future Is Afro (2026)", 
-                spotifyTrackUrl: "https://open.spotify.com/track/2t9YwLdZ8U4kQxVp6hR1mE" 
+                spotifyTrackUrl: "https://open.spotify.com/track/3Z6hGkBF3zIwY9G0CPTG3Z" 
             },
             { 
                 id: 3, 
                 title: "Utshwala", 
                 project: "Streaming Milestone (2025)", 
-                spotifyTrackUrl: "https://open.spotify.com/track/1823319757" 
+                spotifyTrackUrl: "https://open.spotify.com/track/5zIwY9G0CPTG3Z6ehGkBF3" 
             },
             { 
                 id: 4, 
                 title: "Kuzokhanya", 
                 project: "Club Track Anthem (2025)", 
-                spotifyTrackUrl: "https://open.spotify.com/track/5uX3K9z1vK4mX9L9bZ8qCg" 
+                spotifyTrackUrl: "https://open.spotify.com/track/1wY9G0CPTG3Z6ehGkBF3zI" 
             }
         ];
 
         const spotifyPlayerIframe = document.getElementById('spotify-player-iframe');
         let interfaceClickCounter = 0;
 
-        // Dynamic State Loader Initialization Hook
         window.addEventListener('DOMContentLoaded', () => {
-            // Tracking Platform Visits Counter via Local Cache
             let historicalVisits = localStorage.getItem('niipse_platform_visits') || 0;
             historicalVisits = parseInt(historicalVisits) + 1;
             localStorage.setItem('niipse_platform_visits', historicalVisits);
             document.getElementById('view-count-val').innerText = historicalVisits.toLocaleString();
 
-            // Populate unique local simulated play counts for aesthetic realism
             catalogMatrix.forEach(trackItem => {
                 let currentItemStreams = localStorage.getItem(`niipse_stream_track_${trackItem.id}`);
                 if(!currentItemStreams) {
@@ -710,26 +706,19 @@
             document.getElementById('global-stream-val').innerText = runningSummation.toLocaleString();
         }
 
-        // Dedicated Media Spotify Link Transformer and Injector Engine
         function loadAndPlayTrack(trackId) {
             const track = catalogMatrix.find(t => t.id === trackId);
             if (!track) return;
 
-            // PARSING HELPER: Converts clean share URLs to target embed paths dynamically
             let standardUrl = track.spotifyTrackUrl;
-            let embedUrl = standardUrl.replace("open.spotify.com/", "open.spotify.com/embed/");
+            let embedUrl = standardUrl.replace("/track/", "/embed/track/");
             
-            // Append target UI parameters to force clean sizing integration
             if (!embedUrl.includes("?")) {
                 embedUrl += "?utm_source=generator&theme=0";
-            } else if (!embedUrl.includes("utm_source")) {
-                embedUrl += "&utm_source=generator&theme=0";
             }
 
-            // Instantly transition iframe source location cleanly
             spotifyPlayerIframe.src = embedUrl;
 
-            // Highlight chosen item list element layout
             catalogMatrix.forEach(t => {
                 const rowElement = document.getElementById(`row-${t.id}`);
                 if (rowElement) {
@@ -741,11 +730,9 @@
                 }
             });
 
-            // Increment Local Counter
             interfaceClickCounter++;
             document.getElementById('current-track-streams').innerText = interfaceClickCounter;
 
-            // Increment persistent display metric
             let currentStreams = parseInt(localStorage.getItem(`niipse_stream_track_${trackId}`) || 0);
             currentStreams++;
             localStorage.setItem(`niipse_stream_track_${trackId}`, currentStreams);
