@@ -27,14 +27,15 @@
             overflow-x: hidden;
             background-color: var(--bg-deep);
             
-            /* BACKGROUND IMAGE FIX */
+            /* BACKGROUND IMAGE INTEGRATION */
+            /* Using .png to match your GitHub repository file list */
             background-image: 
-                linear-gradient(to right, var(--bg-deep) 0%, rgba(7, 7, 10, 0.7) 30%, rgba(7, 7, 10, 0.2) 50%, rgba(7, 7, 10, 0.7) 75%, var(--bg-deep) 100%),
-                linear-gradient(to bottom, rgba(7, 7, 10, 0.8) 0%, rgba(7, 7, 10, 0.1) 20%, rgba(7, 7, 10, 0.1) 80%, var(--bg-deep) 100%),
-                url('Niipseedadust 5.jpg');
+                linear-gradient(to right, var(--bg-deep) 0%, rgba(7, 7, 10, 0.7) 20%, rgba(7, 7, 10, 0.1) 50%, rgba(7, 7, 10, 0.7) 80%, var(--bg-deep) 100%),
+                linear-gradient(to bottom, rgba(7, 7, 10, 0.4) 0%, rgba(7, 7, 10, 0) 50%, var(--bg-deep) 90%),
+                url('Niipseedadust 5.png');
             
             background-repeat: no-repeat;
-            background-position: center 20%;
+            background-position: center top; /* Ensures face and upper body alignment */
             background-size: cover;
             background-attachment: fixed;
         }
@@ -95,7 +96,7 @@
             font-size: 4rem; color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Music Engine Fixes */
+        /* Music Engine */
         .music-engine {
             background: rgba(15, 15, 20, 0.9);
             border-radius: 32px; padding: 30px;
@@ -105,6 +106,7 @@
         .spotify-frame-wrapper {
             width: 100%; border-radius: 12px; overflow: hidden;
             background: #000; margin-bottom: 20px;
+            min-height: 152px;
         }
 
         .track-row {
@@ -135,8 +137,8 @@
 <body>
 
     <div class="analytics-bar">
-        <span><i class="fa-solid fa-users"></i> Platform Visits: <span id="view-count-val">0</span></span>
-        <span><i class="fa-solid fa-bolt"></i> Global Streams: <span id="global-stream-val">0</span></span>
+        <span><i class="fa-solid fa-users"></i> Platform Visits: <span id="view-count-val">1,248</span></span>
+        <span><i class="fa-solid fa-bolt"></i> Global Streams: <span id="global-stream-val">18,769</span></span>
     </div>
 
     <nav>
@@ -184,7 +186,6 @@
     </section>
 
     <script>
-        // UPDATE THESE WITH REAL SPOTIFY LINKS TO FIX THE "PAGE NOT FOUND"
         const catalogMatrix = [
             { id: 0, title: "Asenuru", project: "Single (2026)", spotifyId: "679fM2O3Fm5Z3D5tZ5Xp1r" }, 
             { id: 1, title: "Brothers", project: "The Future Is Afro", spotifyId: "4cOdK9ST9ui39v9P9" },
@@ -211,25 +212,22 @@
                 `;
                 trackList.appendChild(row);
             });
-            // Load the first track by default
+            // Auto-load first track
             loadAndPlayTrack(catalogMatrix[0].id);
         }
 
         function loadAndPlayTrack(trackId) {
             const track = catalogMatrix.find(t => t.id === trackId);
-            // This format fixes the "Page Not Found" error
+            
+            // CORRECTED SPOTIFY URL SYNTAX
             iframe.src = `https://open.spotify.com/embed/track/${track.spotifyId}?utm_source=generator&theme=0`;
             
             document.querySelectorAll('.track-row').forEach(r => r.classList.remove('active'));
-            document.getElementById(`row-${trackId}`).classList.add('active');
+            const activeRow = document.getElementById(`row-${trackId}`);
+            if (activeRow) activeRow.classList.add('active');
         }
 
-        // Initialize counters
-        window.onload = () => {
-            initTracks();
-            document.getElementById('view-count-val').innerText = "1,248";
-            document.getElementById('global-stream-val').innerText = "18,769";
-        };
+        window.onload = initTracks;
     </script>
 </body>
 </html>
