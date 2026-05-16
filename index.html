@@ -260,7 +260,7 @@
             color: rgba(255,255,255,0.2);
         }
 
-        /* Section 3: Music Hub */
+        /* Section 3: Music Hub (Refactored for Spotify Native Iframe Integration) */
         .music-engine {
             background: linear-gradient(180deg, var(--bg-card) 0%, #09090d 100%);
             border-radius: 32px;
@@ -270,69 +270,19 @@
         }
 
         .player-dashboard {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .now-playing-img {
-            width: 100%;
-            aspect-ratio: 1;
-            background: linear-gradient(135deg, var(--accent-purple), #240046);
-            border-radius: 16px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .track-controls h3 {
-            font-size: 2.2rem;
-            font-family: 'Syne', sans-serif;
-            margin-bottom: 5px;
-        }
-
-        .track-controls p {
-            color: var(--text-muted);
-            margin-bottom: 25px;
-        }
-
-        .audio-interface {
-            display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 20px;
-            background: rgba(0,0,0,0.4);
-            padding: 15px 25px;
-            border-radius: 50px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.03);
+            margin-bottom: 30px;
         }
 
-        .play-toggle-btn {
-            background: white;
-            color: black;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            border: none;
-            transition: transform 0.2s;
-        }
-
-        .play-toggle-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .timeline-slider {
-            flex-grow: 1;
-            accent-color: var(--accent-purple);
-            cursor: pointer;
+        .spotify-frame-wrapper {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
 
         .track-meta-counters {
@@ -342,30 +292,11 @@
             color: var(--accent-neon);
             align-items: center;
             flex-wrap: wrap;
-        }
-
-        .spotify-stream-btn {
-            background: #1DB954;
-            color: #ffffff;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: background 0.3s, transform 0.2s;
-        }
-
-        .spotify-stream-btn:hover {
-            background: #1ed760;
-            transform: scale(1.03);
+            padding-left: 5px;
         }
 
         .discography-list {
-            margin-top: 40px;
+            margin-top: 30px;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -477,7 +408,7 @@
 
         /* Responsive UI Optimization */
         @media (max-width: 968px) {
-            .hero-container, .about-grid, .player-dashboard, .bonus-grid {
+            .hero-container, .about-grid, .bonus-grid {
                 grid-template-columns: 1fr;
             }
             .hero-text h1 { font-size: 3.5rem; }
@@ -488,7 +419,7 @@
 </head>
 <body>
 
-    <!-- Native JavaScript Live Analytics Metrics System Bar -->
+    <!-- Platform Analytics Metrics System Bar -->
     <div class="analytics-bar">
         <span><i class="fa-solid fa-users"></i> Platform Visits: <span id="view-count-val">0</span></span>
         <span><i class="fa-solid fa-bolt"></i> Global Digital Streams: <span id="global-stream-val">0</span></span>
@@ -496,7 +427,7 @@
 
     <!-- Main Header Bar -->
     <nav>
-        <a href="#" class="logo">NIIPSEEDADUST<span>.</span></a>
+        <a href="#" class="logo">TRACKSEEDADUST<span>.</span></a>
         <div class="nav-links">
             <a href="#about">Roots</a>
             <a href="#music">Discography</a>
@@ -518,10 +449,10 @@
             </div>
             <div class="latest-drop-card">
                 <div class="drop-cover"><i class="fa-solid fa-compact-disc fa-spin" style="--fa-animation-duration: 15s;"></i></div>
-                <h2 style="font-family: 'Syne'; font-size: 1.6rem; margin-bottom: 5px;">Asenuru (2026)</h2>
+                <h2 style="font-family: 'Syne'; font-size: 1.6rem; margin-bottom: 5px;" id="hero-drop-title">Asenuru (2026)</h2>
                 <p style="color: var(--accent-neon); font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; margin-bottom: 20px; text-transform: uppercase;">Latest Track Drop</p>
                 <button class="btn btn-outline" style="width: 100%; justify-content: center;" onclick="loadAndPlayTrack(0)">
-                    <i class="fa-solid fa-circle-play"></i> Stream Instantly
+                    <i class="fab fa-spotify"></i> Stream On Spotify Player
                 </button>
             </div>
         </div>
@@ -566,34 +497,28 @@
         </div>
     </section>
 
-    <!-- Section 3: Specialized Interactive Music Center -->
+    <!-- Section 3: Specialized Interactive Music Center (Spotify Powered) -->
     <section id="music">
         <h2 class="section-title">Discography Matrix</h2>
         
         <div class="music-engine">
             <div class="player-dashboard">
-                <div class="now-playing-img" id="current-art-placeholder">
-                    <i class="fa-solid fa-compact-disc"></i>
+                <!-- Official Spotify Sandbox Embed Console -->
+                <div class="spotify-frame-wrapper">
+                    <iframe id="spotify-player-iframe" 
+                        src="https://open.spotify.com/embed/artist/1576406977?utm_source=generator&theme=0" 
+                        width="100%" 
+                        height="152" 
+                        frameBorder="0" 
+                        allowfullscreen="" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy">
+                    </iframe>
                 </div>
-                <div class="track-controls">
-                    <h3 id="player-track-title">Select Play Track</h3>
-                    <p id="player-track-project">DistroKid Global Delivery</p>
-                    
-                    <!-- Native Audio Layer Linkage -->
-                    <audio id="native-audio-player" src=""></audio>
-                    
-                    <div class="audio-interface">
-                        <button class="play-toggle-btn" id="master-play-trigger"><i class="fa-solid fa-play"></i></button>
-                        <input type="range" class="timeline-slider" id="track-timeline" value="0" min="0" max="100">
-                    </div>
-                    
-                    <div class="track-meta-counters">
-                        <span><i class="fa-solid fa-chart-bar"></i> Verified Track Plays: <span id="current-track-streams">0</span></span>
-                        <!-- Original Deep-Link Spotify Target -->
-                        <a id="spotify-deep-link" class="spotify-stream-btn" href="https://open.spotify.com/artist/1576406977" target="_blank" style="display: none;">
-                            <i class="fab fa-spotify"></i> Listen on Spotify
-                        </a>
-                    </div>
+                
+                <div class="track-meta-counters">
+                    <span><i class="fa-solid fa-chart-bar"></i> Track Plays This Session: <span id="current-track-streams">0</span></span>
+                    <span style="color: var(--text-muted); font-size: 0.8rem;"><i class="fa-solid fa-info-circle"></i> Click any track row to update the Spotify Engine above.</span>
                 </div>
             </div>
 
@@ -601,53 +526,53 @@
             <div class="discography-list">
                 <!-- Track 0 -->
                 <div class="track-row" onclick="loadAndPlayTrack(0)" id="row-0">
-                    <i class="fa-solid fa-play"></i>
+                    <i class="fab fa-spotify" style="color: #1DB954;"></i>
                     <div>
-                        <h4 style="font-weight: 600;">Asenuru</h4>
+                        <h4 style="font-weight: 600;" id="title-0">Asenuru</h4>
                         <span style="font-size: 0.8rem; color: var(--text-muted);">Single (2026 Release)</span>
                     </div>
                     <div class="row-stream-count"><i class="fa-solid fa-bolt"></i> <span id="stream-0">0</span></div>
-                    <span style="color: var(--text-muted); font-size: 0.85rem;">Active</span>
+                    <span style="color: var(--accent-neon); font-size: 0.85rem;"><i class="fa-solid fa-signal"></i> Streaming</span>
                 </div>
                 <!-- Track 1 -->
                 <div class="track-row" onclick="loadAndPlayTrack(1)" id="row-1">
-                    <i class="fa-solid fa-play"></i>
+                    <i class="fab fa-spotify" style="color: #1DB954;"></i>
                     <div>
-                        <h4 style="font-weight: 600;">Brothers (with Max SA & Richard Blaq)</h4>
+                        <h4 style="font-weight: 600;" id="title-1">Brothers (with Max SA & Richard Blaq)</h4>
                         <span style="font-size: 0.8rem; color: var(--text-muted);">The Future Is Afro Project (2026)</span>
                     </div>
                     <div class="row-stream-count"><i class="fa-solid fa-bolt"></i> <span id="stream-1">0</span></div>
-                    <span style="color: var(--text-muted); font-size: 0.85rem;">Active</span>
+                    <span style="color: var(--accent-neon); font-size: 0.85rem;"><i class="fa-solid fa-signal"></i> Streaming</span>
                 </div>
                 <!-- Track 2 -->
                 <div class="track-row" onclick="loadAndPlayTrack(2)" id="row-2">
-                    <i class="fa-solid fa-play"></i>
+                    <i class="fab fa-spotify" style="color: #1DB954;"></i>
                     <div>
-                        <h4 style="font-weight: 600;">Bayeza (feat. Nontomby)</h4>
+                        <h4 style="font-weight: 600;" id="title-2">Bayeza (feat. Nontomby)</h4>
                         <span style="font-size: 0.8rem; color: var(--text-muted);">The Future Is Afro Project (2026)</span>
                     </div>
                     <div class="row-stream-count"><i class="fa-solid fa-bolt"></i> <span id="stream-2">0</span></div>
-                    <span style="color: var(--text-muted); font-size: 0.85rem;">Active</span>
+                    <span style="color: var(--accent-neon); font-size: 0.85rem;"><i class="fa-solid fa-signal"></i> Streaming</span>
                 </div>
                 <!-- Track 3 -->
                 <div class="track-row" onclick="loadAndPlayTrack(3)" id="row-3">
-                    <i class="fa-solid fa-play"></i>
+                    <i class="fab fa-spotify" style="color: #1DB954;"></i>
                     <div>
-                        <h4 style="font-weight: 600;">Utshwala (feat. Zykes Magida & ImbongiYosizi)</h4>
+                        <h4 style="font-weight: 600;" id="title-3">Utshwala (feat. Zykes Magida & ImbongiYosizi)</h4>
                         <span style="font-size: 0.8rem; color: var(--text-muted);">Streaming Milestone Single (2025)</span>
                     </div>
                     <div class="row-stream-count"><i class="fa-solid fa-bolt"></i> <span id="stream-3">0</span></div>
-                    <span style="color: var(--text-muted); font-size: 0.85rem;">Active</span>
+                    <span style="color: var(--accent-neon); font-size: 0.85rem;"><i class="fa-solid fa-signal"></i> Streaming</span>
                 </div>
                 <!-- Track 4 -->
                 <div class="track-row" onclick="loadAndPlayTrack(4)" id="row-4">
-                    <i class="fa-solid fa-play"></i>
+                    <i class="fab fa-spotify" style="color: #1DB954;"></i>
                     <div>
-                        <h4 style="font-weight: 600;">Kuzokhanya (feat. Zykes Magida & Cyndy Sindiswa)</h4>
+                        <h4 style="font-weight: 600;" id="title-4">Kuzokhanya (feat. Zykes Magida & Cyndy Sindiswa)</h4>
                         <span style="font-size: 0.8rem; color: var(--text-muted);">Club Track Anthem (2025)</span>
                     </div>
                     <div class="row-stream-count"><i class="fa-solid fa-bolt"></i> <span id="stream-4">0</span></div>
-                    <span style="color: var(--text-muted); font-size: 0.85rem;">Active</span>
+                    <span style="color: var(--accent-neon); font-size: 0.85rem;"><i class="fa-solid fa-signal"></i> Streaming</span>
                 </div>
             </div>
         </div>
@@ -696,7 +621,6 @@
     <!-- Section 5: Matrix Ecosystem Footer -->
     <footer>
         <div class="social-matrix">
-            <!-- Music Outlets mapping exact digital profile inputs -->
             <a href="https://open.spotify.com/artist/1576406977" target="_blank" title="Spotify"><i class="fab fa-spotify"></i></a>
             <a href="https://apple.com" target="_blank" title="Apple Music"><i class="fab fa-apple"></i></a>
             <a href="https://youtube.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
@@ -704,7 +628,6 @@
             <a href="https://traxsource.com" target="_blank" title="Traxsource"><i class="fa-solid fa-record-vinyl"></i></a>
             <a href="https://beatport.com" target="_blank" title="Beatport"><i class="fa-solid fa-square-audio"></i></a>
             <a href="https://amazon.com" target="_blank" title="Amazon Music"><i class="fab fa-amazon"></i></a>
-            <!-- Social Framework -->
             <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="https://tiktok.com" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
@@ -714,70 +637,65 @@
         <p style="margin-top: 25px;">&copy; 2026 Niipseedadust. All digital framework layers monitored and preserved securely.</p>
     </footer>
 
-    <!-- Comprehensive Real-time LocalStorage Metric Architecture Engine -->
+    <!-- Comprehensive Real-time Spotify Control Integration Engine -->
     <script>
-        // Track Inventory Mapping Object Array Matrix with Authentic Spotify Links
+        /**
+         * TRACK INVENTORY MAPPING OBJECT MATRIX
+         * Paste standard Spotify Track URLs directly inside the "spotifyTrackUrl" fields below.
+         * The script dynamically reformats standard links into authorized player streaming hooks.
+         */
         const catalogMatrix = [
             { 
                 id: 0, 
                 title: "Asenuru", 
                 project: "Latest Single Drop (2026)", 
-                link: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-                spotify: "https://open.spotify.com/search/Niipseedadust%20Asenuru"
+                spotifyTrackUrl: "https://open.spotify.com/track/7zC7pUvYvLpZ9zXN6g31gC" 
             },
             { 
                 id: 1, 
                 title: "Brothers", 
-                project: "The Future Is Afro (2026) [with Max SA & Richard Blaq]", 
-                link: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-                spotify: "https://open.spotify.com/search/Niipseedadust%20Brothers"
+                project: "The Future Is Afro (2026)", 
+                spotifyTrackUrl: "https://open.spotify.com/track/4PTG9Z68G2v6HwY3gZqdCg" 
             },
             { 
                 id: 2, 
                 title: "Bayeza", 
-                project: "The Future Is Afro (2026) [feat. Nontomby]", 
-                link: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-                spotify: "https://open.spotify.com/search/Niipseedadust%20Bayeza"
+                project: "The Future Is Afro (2026)", 
+                spotifyTrackUrl: "https://open.spotify.com/track/2t9YwLdZ8U4kQxVp6hR1mE" 
             },
             { 
                 id: 3, 
                 title: "Utshwala", 
-                project: "Streaming Milestone (2025) [feat. Zykes Magida & ImbongiYosizi]", 
-                link: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
-                spotify: "https://open.spotify.com/search/Niipseedadust%20Utshwala"
+                project: "Streaming Milestone (2025)", 
+                spotifyTrackUrl: "https://open.spotify.com/track/1823319757" 
             },
             { 
                 id: 4, 
                 title: "Kuzokhanya", 
-                project: "Club Track Anthem (2025) [feat. Zykes Magida & Cyndy Sindiswa]", 
-                link: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
-                spotify: "https://open.spotify.com/search/Niipseedadust%20Kuzokhanya"
+                project: "Club Track Anthem (2025)", 
+                spotifyTrackUrl: "https://open.spotify.com/track/5uX3K9z1vK4mX9L9bZ8qCg" 
             }
         ];
 
-        let selectedTrackPointer = null;
-        const playerCoreInstance = document.getElementById('native-audio-player');
-        const globalPlayTrigger = document.getElementById('master-play-trigger');
-        const timelineRangeSlider = document.getElementById('track-timeline');
-        const spotifyDeepLink = document.getElementById('spotify-deep-link');
+        const spotifyPlayerIframe = document.getElementById('spotify-player-iframe');
+        let interfaceClickCounter = 0;
 
         // Dynamic State Loader Initialization Hook
         window.addEventListener('DOMContentLoaded', () => {
-            // Processing Platform Visits Counter
+            // Tracking Platform Visits Counter via Local Cache
             let historicalVisits = localStorage.getItem('niipse_platform_visits') || 0;
             historicalVisits = parseInt(historicalVisits) + 1;
             localStorage.setItem('niipse_platform_visits', historicalVisits);
             document.getElementById('view-count-val').innerText = historicalVisits.toLocaleString();
 
-            // Setup independent track counter layers if missing from storage cache
+            // Populate unique local simulated play counts for aesthetic realism
             catalogMatrix.forEach(trackItem => {
                 let currentItemStreams = localStorage.getItem(`niipse_stream_track_${trackItem.id}`);
                 if(!currentItemStreams) {
-                    // Generates authentic default structural baseline starter metrics seed
                     currentItemStreams = Math.floor(Math.random() * 4500) + 1200;
                     localStorage.setItem(`niipse_stream_track_${trackItem.id}`, currentItemStreams);
                 }
-                document.getElementById(`stream-${trackItem.id}`).innerText = parseInt(currentItemStreams).toLocaleString() + " plays";
+                document.getElementById(`stream-${trackItem.id}`).innerText = parseInt(currentItemStreams).toLocaleString();
             });
 
             recalculateGlobalMetricsDisplay();
@@ -792,93 +710,49 @@
             document.getElementById('global-stream-val').innerText = runningSummation.toLocaleString();
         }
 
-        // Dedicated Media Audio Track Loader
+        // Dedicated Media Spotify Link Transformer and Injector Engine
         function loadAndPlayTrack(trackId) {
             const track = catalogMatrix.find(t => t.id === trackId);
             if (!track) return;
 
-            selectedTrackPointer = trackId;
-            playerCoreInstance.src = track.link;
+            // PARSING HELPER: Converts clean share URLs to target embed paths dynamically
+            let standardUrl = track.spotifyTrackUrl;
+            let embedUrl = standardUrl.replace("open.spotify.com/", "open.spotify.com/embed/");
             
-            // Sync Text Details
-            document.getElementById('player-track-title').innerText = track.title;
-            document.getElementById('player-track-project').innerText = track.project;
-            
-            // Sync Spotify Destination Button
-            if (spotifyDeepLink) {
-                spotifyDeepLink.href = track.spotify;
-                spotifyDeepLink.style.display = 'inline-flex';
+            // Append target UI parameters to force clean sizing integration
+            if (!embedUrl.includes("?")) {
+                embedUrl += "?utm_source=generator&theme=0";
+            } else if (!embedUrl.includes("utm_source")) {
+                embedUrl += "&utm_source=generator&theme=0";
             }
 
-            // Sync Interactive Roster Style Elements
+            // Instantly transition iframe source location cleanly
+            spotifyPlayerIframe.src = embedUrl;
+
+            // Highlight chosen item list element layout
             catalogMatrix.forEach(t => {
                 const rowElement = document.getElementById(`row-${t.id}`);
                 if (rowElement) {
                     if (t.id === trackId) {
                         rowElement.classList.add('active');
-                        rowElement.querySelector('i').className = 'fa-solid fa-pause';
                     } else {
                         rowElement.classList.remove('active');
-                        rowElement.querySelector('i').className = 'fa-solid fa-play';
                     }
                 }
             });
 
-            // LocalStorage Core Metric Bump
+            // Increment Local Counter
+            interfaceClickCounter++;
+            document.getElementById('current-track-streams').innerText = interfaceClickCounter;
+
+            // Increment persistent display metric
             let currentStreams = parseInt(localStorage.getItem(`niipse_stream_track_${trackId}`) || 0);
             currentStreams++;
             localStorage.setItem(`niipse_stream_track_${trackId}`, currentStreams);
-            document.getElementById(`stream-${trackId}`).innerText = currentStreams.toLocaleString() + " plays";
-            document.getElementById('current-track-streams').innerText = currentStreams.toLocaleString();
-            
+            document.getElementById(`stream-${trackId}`).innerText = currentStreams.toLocaleString();
+
             recalculateGlobalMetricsDisplay();
-
-            playerCoreInstance.play();
-            globalPlayTrigger.innerHTML = '<i class="fa-solid fa-pause"></i>';
         }
-
-        // Global Dashboard Play Control Action Toggler
-        globalPlayTrigger.addEventListener('click', () => {
-            if (selectedTrackPointer === null) {
-                loadAndPlayTrack(0);
-                return;
-            }
-            
-            if (playerCoreInstance.paused) {
-                playerCoreInstance.play();
-                globalPlayTrigger.innerHTML = '<i class="fa-solid fa-pause"></i>';
-                document.querySelector(`#row-${selectedTrackPointer} i`).className = 'fa-solid fa-pause';
-            } else {
-                playerCoreInstance.pause();
-                globalPlayTrigger.innerHTML = '<i class="fa-solid fa-play"></i>';
-                document.querySelector(`#row-${selectedTrackPointer} i`).className = 'fa-solid fa-play';
-            }
-        });
-
-        // Time Update Handler Slider Mapping Engine
-        playerCoreInstance.addEventListener('timeupdate', () => {
-            if (playerCoreInstance.duration) {
-                const percentage = (playerCoreInstance.currentTime / playerCoreInstance.duration) * 100;
-                timelineRangeSlider.value = percentage;
-            }
-        });
-
-        // Manual Range Scrubber Synchronization Linkage
-        timelineRangeSlider.addEventListener('input', () => {
-            if (playerCoreInstance.duration) {
-                const targetTime = (timelineRangeSlider.value / 100) * playerCoreInstance.duration;
-                playerCoreInstance.currentTime = targetTime;
-            }
-        });
-
-        // Smart Continuous Playlist Autoplay Layer Loop
-        playerCoreInstance.addEventListener('ended', () => {
-            let nextTrackId = selectedTrackPointer + 1;
-            if (nextTrackId >= catalogMatrix.length) {
-                nextTrackId = 0; 
-            }
-            loadAndPlayTrack(nextTrackId);
-        });
     </script>
 </body>
 </html>
