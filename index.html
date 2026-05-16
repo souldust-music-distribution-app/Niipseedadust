@@ -28,14 +28,13 @@
             background-color: var(--bg-deep);
             
             /* BACKGROUND IMAGE INTEGRATION */
-            /* Using .png to match your GitHub repository file list */
             background-image: 
                 linear-gradient(to right, var(--bg-deep) 0%, rgba(7, 7, 10, 0.7) 20%, rgba(7, 7, 10, 0.1) 50%, rgba(7, 7, 10, 0.7) 80%, var(--bg-deep) 100%),
                 linear-gradient(to bottom, rgba(7, 7, 10, 0.4) 0%, rgba(7, 7, 10, 0) 50%, var(--bg-deep) 90%),
                 url('Niipseedadust 5.png');
             
             background-repeat: no-repeat;
-            background-position: center top; /* Ensures face and upper body alignment */
+            background-position: center top; 
             background-size: cover;
             background-attachment: fixed;
         }
@@ -219,7 +218,7 @@
         function loadAndPlayTrack(trackId) {
             const track = catalogMatrix.find(t => t.id === trackId);
             
-            // CORRECTED SPOTIFY URL SYNTAX
+            // This fix ensures the Spotify player loads correctly without the "Page Not Found" error
             iframe.src = `https://open.spotify.com/embed/track/${track.spotifyId}?utm_source=generator&theme=0`;
             
             document.querySelectorAll('.track-row').forEach(r => r.classList.remove('active'));
