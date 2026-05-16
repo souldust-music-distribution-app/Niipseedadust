@@ -12,7 +12,7 @@
     <style>
         :root {
             --bg-deep: #07070a;
-            --accent-purple: #9d4edd;
+            --accent-brown: #8d5d3e; /* Updated to match background earthy tones */
             --accent-neon: #00f5d4;
             --glass: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.12);
@@ -44,7 +44,7 @@
         }
 
         .logo { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: #fff; text-decoration: none; letter-spacing: -1px; }
-        .logo span { color: var(--accent-purple); }
+        .logo span { color: var(--accent-brown); }
 
         section { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
 
@@ -71,15 +71,15 @@
             color: #fff;
             transition: 0.3s ease;
         }
-        .platform-btn:hover { background: var(--accent-purple); transform: translateY(-5px); }
+        .platform-btn:hover { background: var(--accent-brown); transform: translateY(-5px); }
         .platform-btn i { font-size: 2rem; margin-bottom: 10px; display: block; }
 
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
-        .video-card { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 15px; overflow: hidden; border: 1px solid var(--glass-border); }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; }
+        .video-card { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 15px; overflow: hidden; border: 1px solid var(--glass-border); background: #000; }
         .video-card iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
         .badge {
-            background: var(--accent-purple);
+            background: var(--accent-brown);
             color: #fff;
             padding: 6px 16px;
             border-radius: 50px;
@@ -95,7 +95,7 @@
         h2 { color: var(--accent-neon); font-size: 2.5rem; margin-bottom: 25px; }
 
         .btn-main {
-            background: linear-gradient(45deg, var(--accent-purple), #7b2cbf);
+            background: linear-gradient(45deg, var(--accent-brown), #5e3e29);
             color: #fff; padding: 18px 40px;
             border-radius: 50px; text-decoration: none; font-weight: 700;
             display: inline-flex; align-items: center; gap: 12px; transition: 0.4s;
@@ -105,7 +105,7 @@
         .meaning-box { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; border: 1px solid var(--glass-border); }
         
         .discography-list { display: grid; gap: 15px; }
-        .release-item { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; border-left: 4px solid var(--accent-purple); }
+        .release-item { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px; border-left: 4px solid var(--accent-brown); }
 
         footer { text-align: center; padding: 80px 5%; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.8); }
         .social-link { color: #fff; font-size: 1.8rem; transition: 0.3s; margin: 0 15px; }
@@ -128,7 +128,7 @@
 
     <section id="home" style="text-align: center; padding-top: 120px;">
         <span class="badge" style="background: var(--accent-neon); color: #000;">Durban's Finest</span>
-        <h1>BIG WORLD<br><span style="color: var(--accent-purple);">NIIPSEEDADUST</span></h1>
+        <h1>BIG WORLD<br><span style="color: var(--accent-brown);">NIIPSEEDADUST</span></h1>
         <p style="color:var(--text-muted); margin: 40px auto; max-width: 700px; font-size: 1.2rem; line-height: 1.6;">
             Fusing Afro-tech tribal frequencies with high-octane dance floor energy.
         </p>
@@ -193,7 +193,7 @@
             </div>
 
             <div class="platform-grid">
-                <a href="https://open.spotify.com/track/4PTG3Z6ehGkBF3zIwY9G0C2" target="_blank" class="platform-btn"><i class="fab fa-spotify"></i><span>Spotify</span></a>
+                <a href="https://open.spotify.com/track/2S6mF90R3YvHCTEM0zG9Z21" target="_blank" class="platform-btn"><i class="fab fa-spotify"></i><span>Spotify</span></a>
                 <a href="https://music.apple.com/us/artist/niipseedadust/1576406977" target="_blank" class="platform-btn"><i class="fab fa-apple"></i><span>Apple Music</span></a>
                 <a href="https://music.youtube.com/channel/UCOXOo5znK4tTN9SQj-7zr-A" target="_blank" class="platform-btn"><i class="fab fa-youtube"></i><span>YT Music</span></a>
             </div>
@@ -207,7 +207,9 @@
             <div class="video-grid">
                 <div class="video-card"><iframe src="https://www.youtube.com/embed/FPQYuA9EwYQ" frameborder="0" allowfullscreen></iframe></div>
                 <div class="video-card"><iframe src="https://www.youtube.com/embed/QIltY5iYsuU" frameborder="0" allowfullscreen></iframe></div>
+                <div class="video-card"><iframe src="https://www.youtube.com/embed/qgrM0UpayGw" frameborder="0" allowfullscreen></iframe></div>
                 <div class="video-card"><iframe src="https://www.youtube.com/embed/S58RtZppdmM" frameborder="0" allowfullscreen></iframe></div>
+                <div class="video-card"><iframe src="https://www.youtube.com/embed/W7wrbX9MHAA" frameborder="0" allowfullscreen></iframe></div>
                 <div class="video-card"><iframe src="https://www.youtube.com/embed/8j94al_F-sQ" frameborder="0" allowfullscreen></iframe></div>
             </div>
         </div>
